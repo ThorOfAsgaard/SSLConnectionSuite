@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         standard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                urlString = "https://www.google.com";
                 try {
                     StandardSSL("https://www.google.com");
 
@@ -63,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
         no_cert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                urlString = "https://www.pcwebshop.co.uk:443";
                 try {
-                    StandardSSL("https://eaport.eains.com:443");
+                    StandardSSL(urlString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -73,14 +74,17 @@ public class MainActivity extends AppCompatActivity {
         key_chain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customKeyStore("https://eaport.eains.com:443");
+                urlString = "https://www.pcwebshop.co.uk:443";
+                customKeyStore(urlString);
 
             }
         });
         key_chain_google.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                customKeyStore("https://wwww.google.com:443");
+
+                urlString = "https://www.google.com";
+                customKeyStore(urlString);
 
             }
 
@@ -99,8 +103,8 @@ public class MainActivity extends AppCompatActivity {
         custom_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = custom_url.getText().toString();
-                customKeyStore(url);
+                urlString = custom_url.getText().toString();
+                customKeyStore(urlString);
             }
         });
         try {
@@ -153,11 +157,11 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String info = "";
+                String info = "Connection info for :"+urlString+"\r\n";
                 if (httpsURLConnection != null) {
                     try {
                         Certificate[] certs = httpsURLConnection.getServerCertificates();
-                        info = "Cipher Suite:" + httpsURLConnection.getCipherSuite() + "\r\n" +
+                        info += "Cipher Suite:" + httpsURLConnection.getCipherSuite() + "\r\n" +
                                 "Server Certificate:\r\n" + certs[0].getPublicKey();
                     } catch (SSLPeerUnverifiedException e) {
                         info = "Error Connecting to  " + httpsURLConnection.getURL().toString();
@@ -165,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    info = "FAILURE - unable to establish a connection:\r\n"+connectionMessage;
+                    info += "FAILURE - unable to establish a connection:\r\n"+connectionMessage;
                 }
                 connectionStatus.setText(info);
             }
@@ -176,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     void StandardSSL(String URLString) throws IOException {
         final URL u = new URL(URLString);
-
+                httpsURLConnection = null;
 
         new Thread(new Runnable() {
 

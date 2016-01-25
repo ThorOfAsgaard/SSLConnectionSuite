@@ -73,7 +73,8 @@
             android:hint="https://www.cnn.com"
             android:layout_weight=".75"
             android:windowSoftInputMode="stateHidden"
-            android:visibility="gone"
+            android:nextFocusUp="@id/textView"
+            android:nextFocusDown="@id/textView"
             />
     </LinearLayout>
 
@@ -95,10 +96,16 @@
             android:id="@+id/custom_button" />
     </LinearLayout>
 
-    <TextView
-        android:text="Connection Status"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/connection_status"
-        />
+        android:id="@+id/scrollView" >
+
+        <TextView
+            android:text="Connection Status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/connection_status"
+            />
+    </ScrollView>
 </LinearLayout>
