@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">SSLConnectionTest</string>
+    <string name="app_name">SSLConnectionTutorial</string>
+    <string name="explanation">Click one of the buttons below to try and connect.  There are four default settings:\r\n
+    1. Standard HTTPS Connection to a trusted site (https://www.google.com)\r\n
+        2. Attempting to connect to a self-signed certificate that isn\'t already in the keystore (this should FAIL).\r\n
+        3. Connecting using our very special generated BKS which has ONLY self-signed certificate in it.\r\n
+        4. Trying to connect to https://www.google.com with our keychain (this should FAIL).\r\n
+    </string>
 </resources>
