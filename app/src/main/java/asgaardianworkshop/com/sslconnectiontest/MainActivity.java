@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -29,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     Button no_cert;
     Button key_chain;
     Button key_chain_google;
+    Button android_button;
+    Button custom_button;
+    EditText custom_url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         no_cert = (Button) findViewById(R.id.no_cert);
         key_chain = (Button) findViewById(R.id.key_chain);
         key_chain_google = (Button) findViewById(R.id.key_chain_google);
+        android_button = (Button) findViewById(R.id.android_button);
+        custom_button = (Button) findViewById(R.id.custom_button);
+        custom_url = (EditText) findViewById(R.id.url);
 
         standard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    StandardSSL("https://www.pcwebshop.co.uk/");
+                    StandardSSL("https://eaport.eains.com:443");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -77,6 +84,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });
+        android_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = custom_url.getText().toString();
+                try {
+                    StandardSSL(url);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        custom_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = custom_url.getText().toString();
+                customKeyStore(url);
+            }
         });
         try {
             url = new URL(urlString);

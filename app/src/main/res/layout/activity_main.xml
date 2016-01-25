@@ -10,7 +10,10 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="examples.asgaardianworkshop.com.sslconnectiontest.MainActivity"
-    android:theme="@style/AppTheme">
+    android:theme="@style/AppTheme"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    >
     <TextView
         android:text="@string/explanation"
         android:layout_width="wrap_content"
@@ -48,6 +51,50 @@
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Custom URL"
+            android:id="@+id/textView"
+            android:layout_weight=".25"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/url"
+            android:hint="https://www.cnn.com"
+            android:layout_weight=".75"
+            android:windowSoftInputMode="stateHidden"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Android KeyStore"
+            android:id="@+id/android_button" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Custom KeyStore"
+            android:id="@+id/custom_button" />
+    </LinearLayout>
+
     <TextView
         android:text="Connection Status"
         android:layout_width="wrap_content"
