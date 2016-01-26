@@ -39,6 +39,7 @@ python keystore.py keystore.bks KeyStorePassword https://list.of, https://comma.
    httpsURLConnection = cks.returnConnection(u);
 ```
 
+5.  From there, you can create sockets, get inputstreams, get, post, etc.
 
 ### NOTES/CAVEATS
 
