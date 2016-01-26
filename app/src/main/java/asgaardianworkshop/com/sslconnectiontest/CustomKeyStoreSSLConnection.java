@@ -40,15 +40,6 @@ public class CustomKeyStoreSSLConnection {
         tmf.init(trusted);
         c = SSLContext.getInstance("TLS");
         c.init(null, tmf.getTrustManagers(), null);
-        Enumeration<String> aliases = trusted.aliases();
-        while (aliases.hasMoreElements()) {
-            Certificate cert = trusted.getCertificate(aliases.nextElement());
-            Log.d("CERT", cert.getPublicKey().toString());
-            Log.d("CERT", cert.getType());
-
-
-        }
-
     }
 
     public HttpsURLConnection returnConnection(URL url) throws IOException, NoSuchAlgorithmException, KeyStoreException, KeyManagementException {
@@ -57,15 +48,13 @@ public class CustomKeyStoreSSLConnection {
         c = SSLContext.getInstance("TLS");
         c.init(null, tmf.getTrustManagers(), null);
         HttpsURLConnection httpsURLConnect = (HttpsURLConnection) url.openConnection();
-
         httpsURLConnect.setSSLSocketFactory(c.getSocketFactory());
         httpsURLConnect.setHostnameVerifier(new HostnameVerifier() {
             @Override
             public boolean verify(String hostname, SSLSession session) {
-
+                //TODO:  If you really want to lock down your application, you can have a list of acceptable hostnames that this compares against, in addition to the KeyStore.
                 try {
                     if (trusted.containsAlias(hostname)) {
-
                         return true;
                     }
                 } catch (KeyStoreException e) {
@@ -76,7 +65,6 @@ public class CustomKeyStoreSSLConnection {
         });
         try {
             httpsURLConnect.connect();
-            Log.d("httpsURLConnection", httpsURLConnect.getCipherSuite());
         } catch (IOException e) {
             httpsURLConnect = null;
             e.printStackTrace();

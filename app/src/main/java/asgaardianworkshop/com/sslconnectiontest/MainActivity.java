@@ -2,7 +2,6 @@ package asgaardianworkshop.com.sslconnectiontest;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -152,12 +151,13 @@ public class MainActivity extends AppCompatActivity {
 
         }).start();
     }
+
     void updateScreen() {
 
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                String info = "Connection info for :"+urlString+"\r\n";
+                String info = "Connection info for :" + urlString + "\r\n";
                 if (httpsURLConnection != null) {
                     try {
                         Certificate[] certs = httpsURLConnection.getServerCertificates();
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    info += "FAILURE - unable to establish a connection:\r\n"+connectionMessage;
+                    info += "FAILURE - unable to establish a connection:\r\n" + connectionMessage;
                 }
                 connectionStatus.setText(info);
             }
@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     void StandardSSL(String URLString) throws IOException {
         final URL u = new URL(URLString);
-                httpsURLConnection = null;
+        httpsURLConnection = null;
 
         new Thread(new Runnable() {
 
